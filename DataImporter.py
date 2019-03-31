@@ -6,6 +6,8 @@ FIRST_YEAR = 1968
 LAST_YEAR = 2018
 
 
+# Add match dictionary
+# Foreign keys? John Dale wants to know
 def main():
     client = MongoClient()
     db = client['TennisMatches']
