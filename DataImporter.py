@@ -9,7 +9,6 @@ LAST_YEAR = 2018
 # Add match dictionary
 # Foreign keys? John Dale wants to know
 def main():
-    db = client['TennisMatches']
     tourney_dict = {}
     player_dict = {}
     match_dict = {}
@@ -24,8 +23,8 @@ def main():
         tourney_instance = tourney_dict[id]
         tourney_insert = {
             "ID": id,
-            "Name": tourney_instace[0],
-            "Surface": tourney_instace[1],
+            "Name": tourney_instance[0],
+            "Surface": tourney_instance[1],
             "Date": tourney_instance[2]
         }
         tourney.insert_one(tourney_insert)
