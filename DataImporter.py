@@ -9,23 +9,36 @@ LAST_YEAR = 2018
 # Add match dictionary
 # Foreign keys? John Dale wants to know
 def main():
-    client = MongoClient()
     db = client['TennisMatches']
-    print 'here'
     tourney_dict = {}
     player_dict = {}
+    match_dict = {}
     for i in range(FIRST_YEAR, LAST_YEAR + 1):
-        print i
-        print len(tourney_dict)
         data = 'tennis_atp-master/atp_matches_' + str(i) + '.csv'
-        parsed_data = read_data(data, tourney_dict, player_dict)
+        parsed_data = read_data(data, tourney_dict, player_dict, match_dict)
+    client = MongoClient()
+    db = client['tennis']
+    tourney = db['tourney']
+    insert_id = 1
     for id in tourney_dict:
-        print tourney_dict[id]
-    for id in player_dict:
-        print player_dict[id]
+        tourney_instance = tourney_dict[id]
+        tourney_insert = {
+            "ID": id,
+            "Name": tourney_instace[0],
+            "Surface": tourney_instace[1],
+            "Date": tourney_instance[2]
+        }
+        tourney.insert_one(tourney_insert)
+        insert_id += 1
+    # for id in tourney_dict:
+    #     print tourney_dict[id]
+    # for id in player_dict:
+    #     print player_dict[id]
+    # for id in match_dict:
+    #     print match_dict[id]
 
 
-def read_data(filename, tourney_dict, player_dict):
+def read_data(filename, tourney_dict, player_dict, match_dict):
     with open(filename, 'r') as file:
         csv_reader = csv.reader(file, delimiter=',')
         for line in csv_reader:
@@ -57,6 +70,15 @@ def read_data(filename, tourney_dict, player_dict):
                 rank = line[24]
                 player_dict.update({
                     loser_id: (name, dominant_hand, height, country, rank)
+                })
+            match_id = line[6]
+            if match_id not in match_dict:
+                winner = winner_id
+                loser = loser_id
+                winner_seed = line[8]
+                loser_seed = line[18]
+                match_dict.update({
+                    match_id: (winner, loser, winner_seed, loser_seed)
                 })
 
 
