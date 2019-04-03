@@ -39,35 +39,31 @@ def read_data(filename, db, tourneys, matches, players):
             height = line[12]
             country = line[13]
             rank = line[15]
-            players.insert_one({
+            winner_id = players.insert_one({
                 "name": name,
                 "hand": dominant_hand,
                 "height": height,
                 "country": country,
                 "rank": rank
-            })
+            }).inserted_id
             name = line[20]
             dominant_hand = line[21]
             height = line[22]
             country = line[23]
             rank = line[25]
-            players.insert_one({
+            loser_id = players.insert_one({
                 "name": name,
                 "hand": dominant_hand,
                 "height": height,
                 "country": country,
                 "rank": rank
+            }).inserted_id
+            matches.insert_one({
+                "Winner": winner_id,
+                "loser": loser_id,
+                "winner seed": line[8],
+                "loser seed": line[18]
             })
-
-            # match_id = line[6]
-            # if match_id not in match_dict:
-            #     winner = players[winner_id][5]
-            #     loser = players[loser_id][5]
-            #     winner_seed = line[8]
-            #     loser_seed = line[18]
-            #     match_dict.update({
-            #         match_id: (winner, loser, winner_seed, loser_seed)
-            #     })
 
 
 if __name__ == "__main__":
