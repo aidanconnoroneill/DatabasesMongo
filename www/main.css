@@ -1,0 +1,9 @@
+.filter_button {
+    width: 100%;
+    margin-top: 10px;
+}
+.search_button {
+    width: 30%;
+    float: right;
+    margin: 10px;
+}
