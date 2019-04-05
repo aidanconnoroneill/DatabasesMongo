@@ -32,18 +32,18 @@ def read_data(filename, db, tourneys, matches, players):
         winner_id = -1
         loser_id = -1
 
-            try:
-                tourney_id = tourneys.insert_one({
-                    "name": tourney_name,
-                    "surface": surface,
-                    "date": tourney_date
-                }).inserted_id
-            except:
-                tourney_id = tourneys.find_one({
-                    "name": tourney_name,
-                    "surface": surface,
-                    "date": tourney_date
-                })._id
+        try:
+            tourney_id = tourneys.insert_one({
+                "name": tourney_name,
+                "surface": surface,
+                "date": tourney_date
+            }).inserted_id
+        except:
+            tourney_id = tourneys.find_one({
+                "name": tourney_name,
+                "surface": surface,
+                "date": tourney_date
+            })._id
 
             name = line[10]
             dominant_hand = line[11]
