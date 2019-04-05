@@ -31,14 +31,7 @@ def read_data(filename, db, tourneys, matches, players):
         tourney_id = -1
         winner_id = -1
         loser_id = -1
-        for line in csv_reader:
-            if count == 0:
-                count += 1
-                continue
 
-            tourney_name = line[1]
-            surface = line[2]
-            tourney_date = line[5]
             try:
                 tourney_id = tourneys.insert_one({
                     "name": tourney_name,
@@ -51,6 +44,7 @@ def read_data(filename, db, tourneys, matches, players):
                     "surface": surface,
                     "date": tourney_date
                 })._id
+
             name = line[10]
             dominant_hand = line[11]
             height = line[12]
@@ -95,7 +89,6 @@ def read_data(filename, db, tourneys, matches, players):
 
                 print("duplicate match")
                 pass
-
 
 if __name__ == "__main__":
     main()
