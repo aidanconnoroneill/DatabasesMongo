@@ -1,4 +1,4 @@
-<nav aria-label="Page navigation example">
+<nav class="data-pagination">
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" href="#" aria-label="Previous">

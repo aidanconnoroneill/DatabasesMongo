@@ -16,3 +16,6 @@
 .table {
     height: 700px;
 }
+.data-pagination {
+    float: right;
+}

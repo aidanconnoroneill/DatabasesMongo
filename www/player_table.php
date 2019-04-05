@@ -2,24 +2,60 @@
         <thead>
         <tr>
             <th scope="col">
+
                 <input class="form-control player-name" type="text" value="" placeholder="Filter name"> 
-                <input class="btn btn-outline-secondary filter_button"  type="submit" value="Name">
+                <div class="dropdown" >
+                  <button class="btn btn-outline-secondary dropdown-toggle filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Name
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Sort Desc</a>
+                    <a class="dropdown-item" href="#">Sort Asc</a>
+                    </div>
             </th>
             <th scope="col"> 
                 <input class="form-control player-hand" type="text" value="" placeholder="Filter hand"> 
-                <input class="btn btn-outline-secondary filter_button" type="submit" value="Hand">
+                <div class="dropdown" >
+                  <button class="btn btn-outline-secondary dropdown-toggle filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hand
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Sort Desc</a>
+                    <a class="dropdown-item" href="#">Sort Asc</a>
+                    </div>
             </th>
             <th scope="col">
                 <input class="form-control player-height" type="text" value="" placeholder="Filter height"> 
-                <input class="btn btn-outline-secondary filter_button" type="submit" value="Height">
+                <div class="dropdown" >
+                  <button class="btn btn-outline-secondary dropdown-toggle filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Height
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Sort Desc</a>
+                    <a class="dropdown-item" href="#">Sort Asc</a>
+                    </div>
             </th>
             <th scope="col">
                 <input class="form-control player-country" type="text" value="" placeholder="Filter country"> 
-                <input class="btn btn-outline-secondary filter_button" type="submit" value="Country">
+                <div class="dropdown" >
+                  <button class="btn btn-outline-secondary dropdown-toggle filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Country
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Sort Desc</a>
+                    <a class="dropdown-item" href="#">Sort Asc</a>
+                    </div>
             </th>
             <th scope="col">
                 <input class="form-control player-rank" type="text" value="" placeholder="Filter rank"> 
-                <input class="btn btn-outline-secondary filter_button" type="submit" value="Rank">
+                <div class="dropdown" >
+                  <button class="btn btn-outline-secondary dropdown-toggle filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Rank
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Sort Desc</a>
+                    <a class="dropdown-item" href="#">Sort Asc</a>
+                    </div>
             </th>
           </tr>
         </thead>
