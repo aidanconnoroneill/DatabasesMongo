@@ -1,24 +1,24 @@
 <table class="table table-hover table-responsive" id="data-table">
         <thead>
-          <tr>
+        <tr>
             <th scope="col">
-                <input class="form-control player-name" type="text" value="" placeholder="Enter name"> 
+                <input class="form-control player-name" type="text" value="" placeholder="Filter name"> 
                 <input class="btn btn-outline-secondary filter_button"  type="submit" value="Name">
             </th>
             <th scope="col"> 
-                <input class="form-control player-hand" type="text" value="" placeholder="Enter hand"> 
+                <input class="form-control player-hand" type="text" value="" placeholder="Filter hand"> 
                 <input class="btn btn-outline-secondary filter_button" type="submit" value="Hand">
             </th>
             <th scope="col">
-                <input class="form-control player-height" type="text" value="" placeholder="Enter height"> 
+                <input class="form-control player-height" type="text" value="" placeholder="Filter height"> 
                 <input class="btn btn-outline-secondary filter_button" type="submit" value="Height">
             </th>
             <th scope="col">
-                <input class="form-control player-country" type="text" value="" placeholder="Enter country"> 
+                <input class="form-control player-country" type="text" value="" placeholder="Filter country"> 
                 <input class="btn btn-outline-secondary filter_button" type="submit" value="Country">
             </th>
             <th scope="col">
-                <input class="form-control player-rank" type="text" value="" placeholder="Enter rank"> 
+                <input class="form-control player-rank" type="text" value="" placeholder="Filter rank"> 
                 <input class="btn btn-outline-secondary filter_button" type="submit" value="Rank">
             </th>
           </tr>
@@ -41,7 +41,7 @@
               $players = $collection->find([ 'name' => $playerName, 'hand' => $playerHand, 'height' => $playerHeight, 'country' => $playerCountry, 'rank' => $playerRank ]);
 
               foreach ($players as $player) {
-                echo "<tr> <td>$player[name]</td> <td>$player[hand]</td> <td>$player[height]</td> <td>$player[country]</td> <td>$player[rank]</td></tr>";
+                echo "<tr class='player-tuple'> <td class='name-td'>$player[name]</td> <td class='hand-td'>$player[hand]</td> <td class='height-td'>$player[height]</td> <td class='country-td'>$player[country]</td> <td class='rank-td'>$player[rank]</td></tr>";
               }
               
             } else {
@@ -52,7 +52,7 @@
                 if ($tuple_count > 100) {
                   break;
                 }
-                echo "<tr> <td>$player[name]</td> <td>$player[hand]</td> <td>$player[height]</td> <td>$player[country]</td> <td>$player[rank]</td></tr>";
+                echo "<tr class='player-tuple'> <td class='name-td'>$player[name]</td> <td class='hand-td'>$player[hand]</td> <td class='height-td'>$player[height]</td> <td class='country-td'>$player[country]</td> <td class='rank-td'>$player[rank]</td></tr>";
               }
             }
 
