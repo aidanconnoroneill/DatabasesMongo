@@ -25,15 +25,20 @@ def main():
 def read_data(filename, db, tourneys, matches, players):
     with open(filename, 'r') as file:
         csv_reader = csv.reader(file, delimiter=',')
+        count = 0
         for line in csv_reader:
+            if count == 0:
+                count += 1
+                continue
+
             tourney_name = line[1]
             surface = line[2]
             tourney_date = line[5]
-            tourneys.insert_one({
+            tourney_id = tourneys.insert_one({
                 "name": tourney_name,
                 "surface": surface,
                 "date": tourney_date
-            })
+            }).inserted_id
             name = line[10]
             dominant_hand = line[11]
             height = line[12]
@@ -59,8 +64,9 @@ def read_data(filename, db, tourneys, matches, players):
                 "rank": rank
             }).inserted_id
             matches.insert_one({
-                "Winner": winner_id,
+                "winner": winner_id,
                 "loser": loser_id,
+                "tourney": tourney_id,
                 "winner seed": line[8],
                 "loser seed": line[18]
             })
