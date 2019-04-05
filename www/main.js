@@ -129,6 +129,20 @@ sortColumns = function () {
         });
         replaceTuples(tuplesLength, playerTuples);
     });
+    $(".sort-hand-asc").click( function() {    
+        var playerTuples = Array.from($(".player-tuple"));
+        playerTuples.sort(function(a,b) {
+            return a.childNodes[3].innerText.localeCompare(b.childNodes[3].innerText);
+        });
+        replaceTuples(tuplesLength, playerTuples);
+    });
+    $(".sort-hand-desc").click( function() {   
+        var playerTuples = Array.from($(".player-tuple")); 
+        playerTuples.sort(function(b,a) {
+            return a.childNodes[3].innerText.localeCompare(b.childNodes[3].innerText);
+        });
+        replaceTuples(tuplesLength, playerTuples);
+    });
     $(".sort-height-asc").click( function() {    
         var playerTuples = Array.from($(".player-tuple"));
         playerTuples.sort(function(a,b) {
