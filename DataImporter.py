@@ -7,18 +7,20 @@ FIRST_YEAR = 1968
 LAST_YEAR = 2018
 
 
-# Add match dictionary
-# Foreign keys? John Dale wants to know
 def main():
     client = MongoClient()
+    client.drop_database('tennis')
     db = client['tennis']
     tourneys = db['tourneys']
     matches = db['matches']
     players = db['players']
-    result = db.tourneys.create_index(
-        [('tourney_id', pymongo.ASCENDING)], unique=True)
-    result = db.players.create_index(
-        [('player_id', pymongo.ASCENDING)], unique=True)
+
+    db.tourneys.create_index(
+        [('name', pymongo.ASCENDING), ('date', pymongo.ASCENDING)],
+        unique=True)
+    db.players.create_index(
+        [('name', pymongo.ASCENDING), ('height', pymongo.ASCENDING)],
+        unique=True)
     for i in range(FIRST_YEAR, LAST_YEAR + 1):
         data = 'tennis_atp-master/atp_matches_' + str(i) + '.csv'
         read_data(data, db, tourneys, matches, players)
@@ -28,10 +30,16 @@ def read_data(filename, db, tourneys, matches, players):
     with open(filename, 'r') as file:
         csv_reader = csv.reader(file, delimiter=',')
         count = 0
-        tourney_id = -1
-        winner_id = -1
-        loser_id = -1
-
+        # tourney_id = 0
+        # winner_id = -1
+        # loser_id = -1
+        for line in csv_reader:
+            if count == 0:
+                count += 1
+                continue
+            tourney_name = line[1]
+            surface = line[2]
+            tourney_date = line[5]
             try:
                 tourney_id = tourneys.insert_one({
                     "name": tourney_name,
@@ -39,11 +47,12 @@ def read_data(filename, db, tourneys, matches, players):
                     "date": tourney_date
                 }).inserted_id
             except:
-                tourney_id = tourneys.find_one({
+
+                tourney = tourneys.find_one({
                     "name": tourney_name,
-                    "surface": surface,
                     "date": tourney_date
-                })._id
+                })
+                tourney_id = tourney.get('_id')
 
             name = line[10]
             dominant_hand = line[11]
@@ -59,8 +68,10 @@ def read_data(filename, db, tourneys, matches, players):
                     "rank": rank
                 }).inserted_id
             except:
-                print("duplicate winner")
-                pass
+                winner_id = players.find_one({
+                    "name": name,
+                    "height": height
+                }).get('_id')
             name = line[20]
             dominant_hand = line[21]
             height = line[22]
@@ -75,8 +86,10 @@ def read_data(filename, db, tourneys, matches, players):
                     "rank": rank
                 }).inserted_id
             except:
-                print("duplicate looser")
-                pass
+                loser_id = players.find_one({
+                    "name": name,
+                    "height": height
+                }).get('_id')
             try:
                 matches.insert_one({
                     "winner": winner_id,
@@ -86,9 +99,8 @@ def read_data(filename, db, tourneys, matches, players):
                     "loser seed": line[18]
                 })
             except:
-
-                print("duplicate match")
                 pass
+
 
 if __name__ == "__main__":
     main()
