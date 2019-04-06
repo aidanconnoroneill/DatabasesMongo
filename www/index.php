@@ -32,14 +32,6 @@
                 ?>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <?php
-                    include ("table_pagination.php");
-                ?>
-            </div>
-        </div>
-
     </div>
     <?php
         require 'vendor/autoload.php'; // include composer's autoloader

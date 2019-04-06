@@ -37,7 +37,12 @@ def read_data(filename, db, tourneys, matches, players):
                 continue
             tourney_name = line[1]
             surface = line[2]
-            tourney_date = line[5]
+            un_parsed = line[5]
+            tourney_date = str(un_parsed)
+            year = tourney_date[0:4]
+            month = tourney_date[4:6]
+            day = tourney_date[6:8]
+            tourney_date = day + '/' + month + '/' + year
             try:
                 tourney_id = tourneys.insert_one({
                     "name": tourney_name,
@@ -91,6 +96,7 @@ def read_data(filename, db, tourneys, matches, players):
                 matches.insert_one({
                     "winner": winner_id,
                     "loser": loser_id,
+                    "score": line[27].replace(" ", ", "),
                     "tourney": tourney_id,
                     "winnerSeed": line[8],
                     "loserSeed": line[18]
