@@ -86,12 +86,15 @@
               
             } else {
               $players = $collection->find();
-
+              
+              // Our original idea was to display data in sets of 100 tuples,
+              // allowing the user to move through each set, but we are only
+              // going to display the first 100 values as a proof of concept.
               foreach ($players as $player) {
                 $tuple_count++;
                 if ($tuple_count > 100) {
                   break;
-                }
+                } 
                 echo "<tr class='player-tuple'> <td class='name-td'>$player[name]</td> <td class='hand-td'>$player[hand]</td> <td class='height-td'>$player[height]</td> <td class='country-td'>$player[country]</td> <td class='rank-td'>$player[rank]</td></tr>";
               }
             }
