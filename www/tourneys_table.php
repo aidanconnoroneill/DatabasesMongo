@@ -2,7 +2,7 @@
         <thead>
         <tr>
             <th scope="col"> 
-                <input class="form-control tourney-name" type="text" value="" placeholder="Filter hand"> 
+                <input class="form-control tourney-name" type="text" value="" placeholder="Filter name"> 
                 <div class="dropdown" >
                     <button disabled class="btn btn-secondary filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Name
@@ -10,7 +10,7 @@
                 </div>
             </th>
             <th scope="col">
-                <input class="form-control tourney-surface" type="text" value="" placeholder="Filter height"> 
+                <input class="form-control tourney-surface" type="text" value="" placeholder="Filter surface"> 
                 <div class="dropdown" >
                     <button disabled class="btn btn-secondary filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Surface
@@ -18,7 +18,7 @@
                 </div>
             </th>
             <th scope="col">
-                <input class="form-control tourney-date" type="text" value="" placeholder="Filter country"> 
+                <input class="form-control tourney-date" type="text" value="" placeholder="Filter date"> 
                 <div class="dropdown" >
                     <button disabled class="btn btn-secondary filter_button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Date
