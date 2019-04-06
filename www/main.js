@@ -29,7 +29,15 @@ $(document).ready ( function() {
         getCustomData();
       });
     $( ".get_all_button" ).click(function() {
-        getPlayerData();
+        if ($(".nav-player").attr("class").indexOf("active") > -1) {
+            getPlayerData();
+        }
+        if ($(".nav-match").attr("class").indexOf("active") > -1) {
+            getMatchData();
+        } 
+        if ($(".nav-tourney").attr("class").indexOf("active") > -1) {
+            getTourneyData();
+        }
       });
 
 })
@@ -51,6 +59,23 @@ resetCustomValues = function () {
     customTourneyValues.tourneyDate[0] = "";
     customTourneyValues.tourneyName[0] = "";
     customTourneyValues.tourneySurface[0] = "";
+}
+
+filterTourneyTuples = function () {
+    var nameTuples = $(customTourneyValues.tourneyName[1]);
+    var surfaceTuples = $(customTourneyValues.tourneySurface[1]);
+    var dateTuples = $(customTourneyValues.tourneyDate[1]);
+
+    for (i = 0; i < nameTuples.length; i++) { // all the same size
+        if (nameTuples[i].innerText.toUpperCase().indexOf(customTourneyValues.tourneyName[0].toUpperCase()) > -1
+            && surfaceTuples[i].innerText.toUpperCase().indexOf(customTourneyValues.tourneySurface[0].toUpperCase()) > -1
+            && dateTuples[i].innerText.toUpperCase().indexOf(customTourneyValues.tourneyDate[0].toUpperCase()) > -1)
+            nameTuples[i].parentNode.style.display = "";
+        else {
+            console.log("nope")
+            nameTuples[i].parentNode.style.display = "none";
+        }
+    }
 }
 
 filterMatchTuples = function () {
@@ -97,7 +122,19 @@ filterPlayerTuples = function () {
 }
 
 updateCustomValues = function () {
-    
+
+    $(".tourney-name").keyup(function () {
+        customTourneyValues.tourneyName[0] = $(this).val();
+        filterTourneyTuples();
+    })
+    $(".tourney-surface").keyup(function () {
+        customTourneyValues.tourneySurface[0] = $(this).val();
+        filterTourneyTuples();
+    })
+    $(".tourney-date").keyup(function () {
+        customTourneyValues.tourneyDate[0] = $(this).val();
+        filterTourneyTuples();
+    })
     
     $(".match-winner-seed").keyup(function () {
         customMatchValues.matchWinSeed[0] = $(this).val();
@@ -193,6 +230,10 @@ initializeNavigationEventHandlers = function () {
 }
 
 getTourneyData = function () {
+
+    // disable custom search button
+    $(".search_button").prop("disabled", true);
+
     console.log("Getting tourney data...");
     var search_url = "tourneys_table.php"
     $.ajax({
@@ -208,6 +249,10 @@ getTourneyData = function () {
 }
 
 getMatchData = function () {
+
+    // disable custom search button
+    $(".search_button").prop("disabled", true);
+
     console.log("Getting match data...");
     var search_url = "matches_table.php"
     $.ajax({
@@ -224,6 +269,10 @@ getMatchData = function () {
 }
 
 getPlayerData = function () {
+
+    // enable custom search button
+    $(".search_button").prop("disabled", false);
+
     console.log("Getting player data...");
     var search_url = "player_table.php"
     $.ajax({
