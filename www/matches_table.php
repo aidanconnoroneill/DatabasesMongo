@@ -70,6 +70,16 @@
             $db = $conn->tennis;
             $collection = $db->matches;
             $tuple_count = 0;
+
+            $matches = $collection->find();
+
+              foreach ($matches as $match) {
+                $tuple_count++;
+                if ($tuple_count > 100) {
+                  break;
+                }
+                echo "<tr class='player-tuple'> <td class='name-td'>$match[winner]</td> <td class='hand-td'>$match[loser]</td> <td class='height-td'>$match[winnerSeed]</td> <td class='country-td'>$match[loserSeed]</td> <td class='rank-td'>$match[tourney]</td></tr>";
+              }
           ?>                                      
         </tbody>
       </table>

@@ -30,9 +30,7 @@ def read_data(filename, db, tourneys, matches, players):
     with open(filename, 'r') as file:
         csv_reader = csv.reader(file, delimiter=',')
         count = 0
-        # tourney_id = 0
-        # winner_id = -1
-        # loser_id = -1
+
         for line in csv_reader:
             if count == 0:
                 count += 1
@@ -47,7 +45,6 @@ def read_data(filename, db, tourneys, matches, players):
                     "date": tourney_date
                 }).inserted_id
             except:
-
                 tourney = tourneys.find_one({
                     "name": tourney_name,
                     "date": tourney_date
@@ -95,8 +92,8 @@ def read_data(filename, db, tourneys, matches, players):
                     "winner": winner_id,
                     "loser": loser_id,
                     "tourney": tourney_id,
-                    "winner seed": line[8],
-                    "loser seed": line[18]
+                    "winnerSeed": line[8],
+                    "loserSeed": line[18]
                 })
             except:
                 pass
