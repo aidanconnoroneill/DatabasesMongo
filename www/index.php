@@ -24,11 +24,15 @@
                 <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
                 <input class="btn btn-outline-primary get_all_button" type="submit" value="Get All">
             </div>
+        </div>
+        <div class="row justify-content-md-center">
             <div class="col-md-auto">
                 <?php
                     include ("player_table.php"); // navigation bar
                 ?>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <?php
                     include ("table_pagination.php");

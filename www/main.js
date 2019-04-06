@@ -10,12 +10,13 @@ $(document).ready ( function() {
 
     updateCustomValues();
     sortColumns();
+    initializeNavigationEventHandlers();
 
     $( ".search_button" ).click(function() {
         getCustomData();
       });
     $( ".get_all_button" ).click(function() {
-        getAllData();
+        getPlayerData();
       });
 
 })
@@ -98,8 +99,59 @@ getCustomData = function () {
       });
 }
 
-getAllData = function () {
-    console.log("Getting all data");
+initializeNavigationEventHandlers = function () {
+    $(".get-match-data").click(function (event) {
+        event.preventDefault();
+        $(".nav-item").removeClass("active");
+        $(".nav-match").addClass("active");
+        getMatchData();
+    })
+    $(".get-player-data").click(function (event) {
+        event.preventDefault();
+        $(".nav-item").removeClass("active");
+        $(".nav-player").addClass("active");
+        getPlayerData();
+    })
+    $(".get-tourney-data").click(function (event) {
+        event.preventDefault();
+        $(".nav-item").removeClass("active");
+        $(".nav-tourney").addClass("active");
+        getTourneyData();
+    })
+}
+
+getTourneyData = function () {
+    console.log("Getting tourney data...");
+    var search_url = "tourneys_table.php"
+    $.ajax({
+        url: search_url,
+        context: document.body
+      }).done(function(data) {
+          console.log(data)
+        $("#data-table").html(data); // remember to call event hanlders again after reloading html
+        resetCustomValues();
+        updateCustomValues();
+        sortColumns();
+    });
+}
+
+getMatchData = function () {
+    console.log("Getting player data...");
+    var search_url = "matches_table.php"
+    $.ajax({
+        url: search_url,
+        context: document.body
+      }).done(function(data) {
+          console.log(data)
+        $("#data-table").html(data); // remember to call event hanlders again after reloading html
+        resetCustomValues();
+        updateCustomValues();
+        sortColumns();
+    });
+}
+
+getPlayerData = function () {
+    console.log("Getting player data...");
     var search_url = "player_table.php"
     $.ajax({
         url: search_url,
@@ -109,7 +161,7 @@ getAllData = function () {
         resetCustomValues();
         updateCustomValues();
         sortColumns();
-      });
+    });
 }
 
 sortColumns = function () {
